@@ -1,8 +1,8 @@
 <template>
   <main>
-    <div class="main-container">
+    <ul class="main-container">
         <AlbumsCards v-for="album in albums" :key="album.tile" :objectAlbum="album"/>
-    </div>
+    </ul>
   </main>
 </template>
 
@@ -21,6 +21,7 @@ export default {
         return {
             albums: [],
             // dentro questo array metterò gli elementi che ricevo dall'api
+            // error = false,
         }
     },
     // creo una funzione apposta per fare la chiamata e in questo modo in caso posso riutilizzarla
@@ -28,6 +29,7 @@ export default {
         fetchAlbums: function() {
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then (res => {
+                // this.error = false; //se la chiamata va a buon fine allora imposto l'errore in falso
                 console.log(res.data);
                 this.albums = (res.data.response);
                 console.log(this.albums);
@@ -35,7 +37,9 @@ export default {
 
             //recupero errori o risposte negative del server
             .catch( err => {
-                console.warn(err.response)
+                console.warn(err.response);
+                // se la pagina va in errore resetto l'album e potrei anche mostrare un messaggio di errore
+                this.albums = [];
             })
         }
     },
@@ -48,19 +52,21 @@ export default {
 
 <style scoped lang="scss">
 
+@import '../assets/scss/common.scss';
+
 main{
-    width: 100%;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 90px 20px 20px 20px;
 }
 
 .main-container{
-    width: 70%;
-    padding: 70px 0;
+    max-width: 1000px;
     display: flex;
     flex-wrap: wrap;
-    gap: 3%;
+    gap: 20px 3%;
 }
 
 </style>

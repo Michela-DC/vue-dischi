@@ -1,5 +1,5 @@
 <template>
-    <div class="card-wrapper">
+    <li class="card-wrapper">
 
         <figure class="poster">
             <img :src="objectAlbum.poster" alt="">
@@ -20,7 +20,7 @@
             </div>
         </div>
       
-    </div>
+    </li>
 </template>
 
 <script>
@@ -38,12 +38,12 @@ export default {
 
 <style scoped lang="scss">
 
+@import '../assets/scss/common.scss';
+
 .card-wrapper{
     width: calc(88% / 5);
-    height: 350px;
-    background-color: #2E3A46;
-    margin-bottom: 20px;
-    padding: 20px;
+    background-color: rgba(white, 0.1);; 
+    padding: 15px;
 }
 
 .poster{
@@ -67,13 +67,17 @@ export default {
         margin-bottom: 15px;
     }
 
+    .author, .genre, .year{
+        margin-bottom: 5px;
+    }
+
     .author {
       color: #18D860;
     }
 
     .genre, .year {
         color: #999999;
-        margin: 3px;
+        font-size: 14px;
     }
 }
 

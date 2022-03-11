@@ -21,17 +21,11 @@ export default {
 
 <style lang="scss">
 
-// @import '.assets/scss/common.scss';
-
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@import './assets/scss/common.scss';
 
 #app {
-  // height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   background-color: #1E2D3B;
+  font-family: 'Roboto', sans-serif;;
 }
 </style>

@@ -18,7 +18,12 @@ export default {
 <style scoped lang="scss">
 
 header{
-    background-color: #2E3A46;
+    // background-color: #2E3A46;
+    background-color: rgba(white, 0.1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
 }
 
 .header-container{
