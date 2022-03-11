@@ -30,7 +30,7 @@ export default {
 }
 
 #app {
-  height: 100vh;
+  // height: 100vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   background-color: #1E2D3B;
 }
