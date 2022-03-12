@@ -1,6 +1,5 @@
 <template>
     <li class="card-wrapper">
-
         <figure class="poster">
             <img :src="objectAlbum.poster" alt="">
         </figure>
@@ -30,9 +29,8 @@ export default {
         objectAlbum: {
           type: Object,
           require: true,
-        }
-    }
-    
+        },
+    },
 }
 </script>
 
