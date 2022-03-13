@@ -1,10 +1,10 @@
 <template>
   <main>
     <!-- con v-on ascolto l'evento che ho chiamato select nell'emit  -->
-    <SelectBar v-on:select="setOption"/>
+    <SelectBar v-on:select="setOption" :albumsOptions="albums"/>
 
     <ul class="main-container">
-        <AlbumsCards v-for="album in filteredByGenre" :key="album.tile" :objectAlbum="album"/>
+        <AlbumsCards v-for="album in filteredGenreArtist" :key="album.title" :objectAlbum="album"/>
     </ul>
   </main>
 </template>
@@ -54,17 +54,25 @@ export default {
             console.log("ascoltato l'evento select e il dato è " + option);
             // salvo l'opzione scelta dentro alla selectedOption in modo che venga salvata dentro a qualcosa che poi possa essere stampato 
             this.selectedOption = option;
-        }
+        },
     },
 
     computed: { 
-        // funzione che filtra i generi a seconda dell'opzione selezionata e ritorna l'array filtrato
-        filteredByGenre: function () {
-            // .filter fa un ciclo dell'array e per ogni elemento invoca la funzione che ha come parametro 
+
+        filteredGenreArtist: function () {
+            // funzione in cui se la selectedOption è compresa tra i generi allora mi ritorna l'array con i generi filtrati
+            // altrimenti mi ritorna l'array filtrato per artisti
             return this.albums.filter(album => { //album è l'elemento corrente
-                return album.genre.toLowerCase().includes(this.selectedOption.toLowerCase());
+
+                if(album.genre.toLowerCase().includes(this.selectedOption.toLowerCase()) ){
+                    console.log(album.genre.toLowerCase().includes(this.selectedOption.toLowerCase()))
+                    return album.genre.toLowerCase().includes(this.selectedOption.toLowerCase());
+                }else{
+                    return album.author.toLowerCase().includes(this.selectedOption.toLowerCase());
+                }
             })
-        }
+            
+        },
     },
 
     // la chiamata al server la faccio nell'hook created perché è quando il componente è stato creato 
@@ -87,7 +95,8 @@ main{
 }
 
 .main-container{
-    max-width: 1000px;
+    // max-width: 1000px; se lascio max-width quando seleziono e mi mostra solo una card viene rimpicciolita in width
+    width: 1000px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
