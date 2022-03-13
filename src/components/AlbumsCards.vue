@@ -35,48 +35,38 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 @import '../assets/scss/common.scss';
-
 .card-wrapper{
     width: calc(88% / 5);
     background-color: rgba(white, 0.1);; 
     padding: 15px;
 }
-
 .poster{
   margin: 0 auto;
-
     img{
         display: block;
         width: 100%;
         margin-bottom: 20px;
     }
 }
-
 .album-info {
     text-align: center;
     margin: 0 auto;
-
     .title{
         text-transform: uppercase;
         font-weight: bold;
         color: white;
         margin-bottom: 15px;
     }
-
     .author, .genre, .year{
         margin-bottom: 5px;
     }
-
     .author {
       color: #18D860;
     }
-
     .genre, .year {
         color: #999999;
         font-size: 14px;
     }
 }
-
 </style>
