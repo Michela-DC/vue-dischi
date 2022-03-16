@@ -65,14 +65,8 @@ export default {
 <style scoped lang="scss">
 
 .select-wrapper {
-// margin: 0 auto;
-// padding-right: 44px; 
-position: absolute;
-height: 65px;
-top: 0;
-display: flex;
-align-items: center;
-gap: 30px;
+margin: 0 auto;
+padding-right: 44px; 
 
     #select{
         width: 250px;

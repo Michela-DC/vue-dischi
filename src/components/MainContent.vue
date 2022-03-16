@@ -1,28 +1,33 @@
 <template>
-  <main>
-    <!-- con v-on ascolto l'evento che ho chiamato select nell'emit  -->
-    <SelectBar v-on:select="setOption" :albumsOptions="albums"/>
+  <div class="container">
+      <header>
+        <div class="header-container">
+                <figure class="logo-wrapper">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Spotify.png/600px-Spotify.png" alt="">
+                </figure>
+                <!-- con v-on ascolto l'evento che ho chiamato select nell'emit  -->
+                <SelectBar v-on:select="setOption" :albumsOptions="albums"/>
+        </div> 
+    </header>
 
-    <ul class="main-container">
-        <AlbumsCards v-for="album in filteredGenreArtist" :key="album.title" :objectAlbum="album"/>
-    </ul>
-  </main>
+    <main>
+        <ul class="cards-container">
+            <AlbumsCards v-for="album in filteredGenreArtist" :key="album.title" :objectAlbum="album"/>
+        </ul>
+    </main>
+  </div>
 </template>
 
 <script>
-
 import axios from 'axios';
 import AlbumsCards from './AlbumsCards.vue'
 import SelectBar from './SelectBar.vue'
-
-
 export default {
     name: 'MainContent',
     components: {
         AlbumsCards,
         SelectBar,
     },
-
     data() {
         return {
             albums: [], // dentro questo array metterò gli elementi che ricevo dall'api
@@ -39,7 +44,6 @@ export default {
                 this.albums = (res.data.response);
                 console.log('array con dentro gli album',this.albums);
             })
-
             //recupero errori o risposte negative del server
             .catch( err => {
                 console.warn(err.response);
@@ -47,7 +51,6 @@ export default {
                 this.albums = [];
             })
         },
-
         // funzione che riceverà i dati dell'evento @select
         setOption: function(option){
             // dentro ad option viene salvato il dato selezionato con l'evento select
@@ -56,14 +59,11 @@ export default {
             this.selectedOption = option;
         },
     },
-
     computed: { 
-
         filteredGenreArtist: function () {
             // funzione in cui se la selectedOption è compresa tra i generi allora mi ritorna l'array con i generi filtrati
             // altrimenti mi ritorna l'array filtrato per artisti
             return this.albums.filter(album => { //album è l'elemento corrente
-
                 if(album.genre.toLowerCase().includes(this.selectedOption.toLowerCase()) ){
                     console.log(album.genre.toLowerCase().includes(this.selectedOption.toLowerCase()))
                     return album.genre.toLowerCase().includes(this.selectedOption.toLowerCase());
@@ -74,7 +74,6 @@ export default {
             
         },
     },
-
     // la chiamata al server la faccio nell'hook created perché è quando il componente è stato creato 
     created () {
         this.fetchAlbums();
@@ -83,10 +82,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 @import '../assets/scss/common.scss';
 
-main{
+.container{
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -94,7 +92,29 @@ main{
     padding: 90px 20px 20px 20px;
 }
 
-.main-container{
+header{
+    // background-color: #2E3A46;
+    background-color: rgba(white, 0.1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.header-container{
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding: 0 23px;
+    .logo-wrapper{
+        width: fit-content;
+        img{
+            height: 44px;
+            display: block;
+        }
+    }
+}
+
+.cards-container{
     // max-width: 1000px; se lascio max-width quando seleziono e mi mostra solo una card viene rimpicciolita in width
     width: 1000px;
     display: flex;
@@ -102,5 +122,4 @@ main{
     flex-wrap: wrap;
     gap: 20px 3%;
 }
-
 </style>
